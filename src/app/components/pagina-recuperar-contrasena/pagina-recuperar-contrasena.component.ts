@@ -31,16 +31,18 @@ export class PaginaRecuperarContrasenaComponent implements OnInit {
     const tk = this.token;
     const body = {
       tk,
-      contrasena: [this.formCambiarPass.value.contrasena]
+      nueva_contrasena: this.formCambiarPass.value.contrasena
     };
     this.recoveryService.changePass(body)
       .subscribe(data => {
         console.log(data);
-        if (!data.body) {
+        if (!data.error) {
           Swal.fire({
             title: 'Se cambio correctamente la contraseña',
             icon: 'success',
             text: 'Su contraseña ha sido remplazada correctamente en la plataforma'
+          }).then(() => {
+            window.open('http://plataforma.cotacyt.gob.mx/PremioEstatal2020/#/', '_blank');
           });
         } else {
           Swal.fire({

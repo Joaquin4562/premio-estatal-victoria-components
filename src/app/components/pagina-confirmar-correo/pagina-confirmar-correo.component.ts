@@ -25,11 +25,13 @@ export class PaginaConfirmarCorreoComponent implements OnInit {
     this.registerService.confirmMail(this.token)
       .subscribe(data => {
         console.log(data);
-        if (!data.body) {
+        if (!data.error) {
           Swal.fire({
             title: 'Se confirmo el correo correctamente',
             icon: 'success',
             text: 'Su correo ha sido confirmado correctamente, ahora ya puedes ingresar a la plataforma'
+          }).then(() => {
+            window.open('http://plataforma.cotacyt.gob.mx/PremioEstatal2020/#/', '_blank');
           });
         } else {
           Swal.fire({
